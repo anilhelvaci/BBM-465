@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Main {
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, NoSuchPaddingException, BadPaddingException {
 
 
         // Key üretimi şimdilik böyle olacak. Example txt dosyaları geldiğinde değişecek.
@@ -63,15 +63,15 @@ public class Main {
 
 
 
-        // @test CBC
-        // TODO DES
-        // AES encrypt and decrypt
+//         @test CBC
+//         TODO DES
+//         AES encrypt and decrypt
 
-//        System.out.println("CBC gönderilecek mesaj->               "+new String(plainTextByte));
-//        byte[] sifrelenmisCBC = cbc.encrypt(plainTextByte, secretKey, ecb, iv);
-//        System.out.println("CBC şifrelenmiş mesaj->                "+new String(sifrelenmisCBC));
-//        System.out.println("CBC şifreli mesajı açınca görülen->    "+new String(cbc.decrypt(sifrelenmisCBC,secretKey,ecb,iv)));
-//
+        System.out.println("CBC gönderilecek mesaj->               "+new String(plainTextByte));
+        byte[] sifrelenmisCBC = cbc.encrypt(plainTextByte, secretKey, ecb, iv);
+        System.out.println("CBC şifrelenmiş mesaj->                "+new String(sifrelenmisCBC));
+        System.out.println("CBC şifreli mesajı açınca görülen->    "+new String(cbc.decrypt(sifrelenmisCBC,secretKey,ecb,iv)));
+
 
 
 
