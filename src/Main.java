@@ -2,12 +2,13 @@ import javax.crypto.*;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Random;
 
 
 public class Main {
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, NoSuchPaddingException, BadPaddingException {
 
 
         // Key üretimi şimdilik böyle olacak. Example txt dosyaları geldiğinde değişecek.
@@ -34,7 +35,7 @@ public class Main {
 
         // TODO plaintext boyutu init vektörün boyundan küçükse, plaintext extend edilecek.
 
-        String plainText = "1234567812345678abcdefghabcdefghzxcvbnmkzxcvbnm1";
+        String plainText = "asdasdasdasdasda";
         byte[] plainTextByte = plainText.getBytes(StandardCharsets.UTF_8);
 
 
@@ -87,9 +88,17 @@ public class Main {
 
 
 
-        //CTR ctr = new CTR();
+        //@test CTR
+        //TODO DES
+        //CTR encrypt and decrypt
 
-
+//        CTR ctr = new CTR();
+//
+//        String cipherText = new String(ctr.encrypt(plainTextByte, secretKey, ecb, nonce));
+//        System.out.println(cipherText);
+//        byte[] cipherTextByte = ctr.encrypt(plainTextByte, secretKey, ecb, nonce);
+//        String plainText1 = new String(ctr.decrypt(cipherTextByte,secretKey,ecb,nonce));
+//        System.out.println(plainText1);
 
     }
 
