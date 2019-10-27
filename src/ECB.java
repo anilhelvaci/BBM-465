@@ -6,29 +6,10 @@ public class ECB {
 
 
 
-    public byte[] encryptAES(byte[] plainText, SecretKey secretKey) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
+    public byte[] encrypt(byte[] plainText, SecretKey secretKey, String algorithm) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
 
 
-        Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
-
-        cipher.init(Cipher.ENCRYPT_MODE,secretKey);
-
-        return cipher.doFinal(plainText);
-
-    }
-
-    public byte[] decryptAES(byte[] cipherText, SecretKey secretKey) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
-
-        Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
-
-        cipher.init(Cipher.DECRYPT_MODE,secretKey);
-
-        return cipher.doFinal(cipherText);
-    }
-
-    public byte[] encryptDES(byte[] plainText, SecretKey secretKey) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
-
-        Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");
+        Cipher cipher = Cipher.getInstance(algorithm+"/ECB/NoPadding");
 
         cipher.init(Cipher.ENCRYPT_MODE,secretKey);
 
@@ -36,14 +17,15 @@ public class ECB {
 
     }
 
-    public byte[] decryptDES(byte[] cipherText, SecretKey secretKey) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
+    public byte[] decrypt(byte[] cipherText, SecretKey secretKey, String algorithm) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
 
-        Cipher cipher = Cipher.getInstance("DES/ECB/NoPadding");
+        Cipher cipher = Cipher.getInstance(algorithm+"/ECB/NoPadding");
 
         cipher.init(Cipher.DECRYPT_MODE,secretKey);
 
         return cipher.doFinal(cipherText);
     }
+
 
 
 
