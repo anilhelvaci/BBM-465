@@ -3,19 +3,51 @@ import javax.crypto.*;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Random;
 
 
 public class Main {
 
+    public static byte[] xorla(byte[] iv, byte[] plainTextByte, String algorithm){                                                // Klasik xor.
+
+        int blockSize = algorithmBlockSize(algorithm);
+        byte[] xoredArray = new byte[blockSize];
+
+        int i = 0;
+        for (byte b : iv)
+            xoredArray[i] = (byte) (b ^ plainTextByte[i++]);
 
 
-    public static byte[] padding(byte[] plainTextBytes){
+        return xoredArray;
+    }
+
+    public static int algorithmBlockSize(String algorithm){
+        int blockSize;                    // 8 for DES, 16 for AES (byte)
+        if (algorithm.equals("DES")){
+            blockSize = 8;
+        }
+        else if (algorithm.equals("AES")){
+            blockSize = 16;
+        }
+        else {
+            System.out.println("Algorithm does not found!");
+            return 0;
+        }
+
+        return blockSize;
+
+    }
 
 
-        float boy = (float) plainTextBytes.length/16;
-        int boyWithPadding = (int) Math.ceil(boy)*16;
+    public static byte[] padding(byte[] plainTextBytes, String algorithm){
+
+        int blockSize = algorithmBlockSize(algorithm);
+
+        float boy = (float) plainTextBytes.length/blockSize;
+        int boyWithPadding = (int) Math.ceil(boy)*blockSize;
 
 
         byte[] plainTextBytesWithPadding = new byte[boyWithPadding];
@@ -73,8 +105,15 @@ public class Main {
         keyGen1.init(56);
         SecretKey secretKey1 = keyGen1.generateKey();
 
+
+
+
+        String algorithm = args[3];                         // 3. argüman algoritmayı söyleyecek.
+        int blockSize = algorithmBlockSize(algorithm);
+
+
         Random rd = new Random(); // creating Random object
-        byte[] iv = new byte[16];
+        byte[] iv = new byte[blockSize];
         for (int i = 0; i < iv.length; i++) {
             rd.nextBytes(iv); // storing random integers in an array
         }
@@ -83,79 +122,69 @@ public class Main {
 
 
 
-        // TODO plaintext boyutu init vektörün boyundan küçükse, plaintext extend edilecek.
-
-        String plainText = "asdasd";
+        String plainText = "anılın aq";
         byte[] plainTextByte = plainText.getBytes(StandardCharsets.UTF_8);
 
 
-        ECB ecb = new ECB();
-        CBC cbc = new CBC();
 
-          // @test ECB
+        /*
 
-//        // AES encrypt and decrypt (ECB)
-//
-//
+        ÇOK ÖNEMLİ NOT
+
+        Aşağıdaki denemelerde DES için "secretKey1", AES için "secretKey" parametresi kullanılmalıdır.
+        Hocanın vereceği key algoritmayla uyumlu olaracağı için sadece 1 variabla tutulacaktır. Şu an için hoca input output paylaşmadı.
+        Bu sebepten key'ler farklı variable'larda tutuluyor.
+
+        */
+
+
+
+
+
+
+
+        //@test ECB
+
+
+//        ECB ecb = new ECB();
 //        System.out.println("gönderilecek mesaj->                            "+plainText);
-//        System.out.println("şifreli mesaj->                                 "+new String(ecb.encryptAES(plainTextByte,secretKey)));
-//        System.out.println("şifreli mesajı açınca görülen->                 "+new String(ecb.decryptAES(ecb.encryptAES(plainTextByte,secretKey),secretKey)));
-//
-//
-//        // DES encrypt and decrypt (ECB)
-//
-//
-//        System.out.println("ECB gönderilecek mesaj->                            "+plainText);
-//        System.out.println("ECB şifreli mesaj->                                 "+new String(ecb.encryptDES(plainTextByte,secretKey1)));
-//        System.out.println("ECB şifreli mesajı açınca görülen->                 "+new String(ecb.decryptDES(ecb.encryptDES(plainTextByte,secretKey1),secretKey1)));
-
-
+//        System.out.println("şifreli mesaj->                                 "+new String(ecb.encrypt(padding(plainTextByte,algorithm),secretKey,algorithm)));
+//        System.out.println("şifreli mesajı açınca görülen->                 "+new String(ecb.decrypt(ecb.encrypt(padding(plainTextByte,algorithm),secretKey,algorithm),secretKey,algorithm)));
 
 
 
 
         // @test CBC
-        // TODO DES
-        // AES encrypt and decrypt
 
+//        CBC cbc = new CBC();
 //        System.out.println("CBC gönderilecek mesaj->               "+new String(plainTextByte));
-//        byte[] sifrelenmisCBC = cbc.encrypt(plainTextByte, secretKey, ecb, iv);
+//        byte[] sifrelenmisCBC = cbc.encrypt(padding(plainTextByte,algorithm), secretKey, ecb, iv,algorithm);
 //        System.out.println("CBC şifrelenmiş mesaj->                "+new String(sifrelenmisCBC));
-//        System.out.println("CBC şifreli mesajı açınca görülen->    "+new String(cbc.decrypt(sifrelenmisCBC,secretKey,ecb,iv)));
-//
+//        System.out.println("CBC şifreli mesajı açınca görülen->    "+new String(cbc.decrypt(sifrelenmisCBC,secretKey,ecb,iv,algorithm)));
+
 
 
 
         // @test OFB
-        // TODO DES
-        // OFB encrypt and decrypt
+
 
 //        OFB ofb = new OFB();
-//        byte[] sifrelenmisOFB = ofb.encrypt(plainTextByte,secretKey,ecb,iv);
+//        byte[] sifrelenmisOFB = ofb.encrypt(padding(plainTextByte,algorithm),secretKey,ecb,iv,algorithm);
 //        System.out.println("OFB gönderilecek mesaj                     "+new String(plainTextByte));
 //        System.out.println("OFB şifrelenmiş mesaj->                    "+new String(sifrelenmisOFB));
-//        System.out.println("OFB şifreli mesajı açınca görülen->        "+new String(ofb.decrypt(sifrelenmisOFB,secretKey,ecb,iv)));
+//        System.out.println("OFB şifreli mesajı açınca görülen->        "+new String(ofb.decrypt(sifrelenmisOFB,secretKey,ecb,iv,algorithm)));
 
 
 
         //@test CTR
-        //TODO DES
-        //CTR encrypt and decrypt
+
 
 //        CTR ctr = new CTR();
-//
-//        String cipherText = new String(ctr.encrypt(plainTextByte, secretKey, ecb, nonce));
+//        String cipherText = new String(ctr.encrypt(padding(plainTextByte,algorithm), secretKey, ecb, nonce,algorithm));
 //        System.out.println(cipherText);
-//        byte[] cipherTextByte = ctr.encrypt(plainTextByte, secretKey, ecb, nonce);
-//        String plainText1 = new String(ctr.decrypt(cipherTextByte,secretKey,ecb,nonce));
+//        byte[] cipherTextByte = ctr.encrypt(padding(plainTextByte,algorithm), secretKey, ecb, nonce,algorithm);
+//        String plainText1 = new String(deletePadding(ctr.decrypt(cipherTextByte,secretKey,ecb,nonce,algorithm)));
 //        System.out.println(plainText1);
-
-
-
-
-
-
-
 
 
     }
