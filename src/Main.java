@@ -1,3 +1,4 @@
+
 import javax.crypto.*;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -7,6 +8,55 @@ import java.util.Random;
 
 
 public class Main {
+
+
+
+    public static byte[] padding(byte[] plainTextBytes){
+
+
+        float boy = (float) plainTextBytes.length/16;
+        int boyWithPadding = (int) Math.ceil(boy)*16;
+
+
+        byte[] plainTextBytesWithPadding = new byte[boyWithPadding];
+        System.arraycopy(plainTextBytes,0,plainTextBytesWithPadding,0,plainTextBytes.length);
+
+
+        byte paddedValue = 32;             //  Mesajın sonunda boşluk ekleme (16 byte ve katı olması için padding) (0x32 = whitespace ASCII kodu)
+
+        for (int i = plainTextBytes.length; i<boyWithPadding; i++){
+
+            plainTextBytesWithPadding[i] = paddedValue;
+
+        }
+
+        return plainTextBytesWithPadding;
+
+
+    }
+
+    public static byte[] deletePadding(byte[] plainTextBytes){
+
+
+        byte paddedValue = 32;
+        int j = plainTextBytes.length;
+        for (int i = plainTextBytes.length-1; i>=0; i--){
+            byte[] temp = new byte[i+1];
+            if (plainTextBytes[i] == paddedValue){
+                j--;
+            }
+            else{
+                System.arraycopy(plainTextBytes,0,temp,0,j);
+                return temp;
+            }
+
+        }
+
+        return "Only Whitespaces can not be send.".getBytes();
+
+    }
+
+
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, NoSuchPaddingException, BadPaddingException {
 
@@ -35,7 +85,7 @@ public class Main {
 
         // TODO plaintext boyutu init vektörün boyundan küçükse, plaintext extend edilecek.
 
-        String plainText = "asdasdasdasdasda";
+        String plainText = "asdasd";
         byte[] plainTextByte = plainText.getBytes(StandardCharsets.UTF_8);
 
 
@@ -99,6 +149,14 @@ public class Main {
 //        byte[] cipherTextByte = ctr.encrypt(plainTextByte, secretKey, ecb, nonce);
 //        String plainText1 = new String(ctr.decrypt(cipherTextByte,secretKey,ecb,nonce));
 //        System.out.println(plainText1);
+
+
+
+
+
+
+
+
 
     }
 
