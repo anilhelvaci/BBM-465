@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95a4b4e6-ce27-4fb7-b34d-65012d37f14f" name="Default Changelist" comment="">
+    <list default="true" id="95a4b4e6-ce27-4fb7-b34d-65012d37f14f" name="Default Changelist" comment="16Byte padding ve removePadding methodları eklendi.">
+      <change afterPath="$PROJECT_DIR$/input_file_test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/key_file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BBM465-1/CBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BBM465-1/CBC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BBM465-1/CTR.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BBM465-1/CTR.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BBM465-1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BBM465-1/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BBM465-1/ECB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BBM465-1/ECB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BBM465-1/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BBM465-1/OFB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BBM465-1/OFB.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CTR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CTR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileCipher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OFB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadFile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,11 +48,19 @@
   <component name="ProjectId" id="1SZ4fHtlo2fv9QzkqZMQTLp76zf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.37882096" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -61,8 +75,8 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="FileCipher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FileCipher" />
       <module name="BBM465-1" />
       <option name="PROGRAM_PARAMETERS" value="aes aes aes AES" />
       <method v="2">
@@ -71,7 +85,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.FileCipher" />
       </list>
     </recent_temporary>
   </component>
@@ -85,6 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571757886033</updated>
+      <workItem from="1572214742676" duration="28501000" />
     </task>
     <task id="LOCAL-00001" summary="CTR-mode">
       <created>1572129527792</created>
@@ -103,12 +118,17 @@
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

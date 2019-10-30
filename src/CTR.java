@@ -7,13 +7,16 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 public class CTR {
+    private  int blockSize;
 
-
+    public CTR(int blockSize) {
+        this.blockSize = blockSize;
+    }
 
     public byte[] encrypt(byte[] plainTextBytes, SecretKey secretKey, ECB ecb, String nonce, String algorithm) throws NoSuchAlgorithmException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException, InvalidKeyException {
 
 
-        int blockSize = Main.algorithmBlockSize(algorithm);
+//        int blockSize = FileCipher.algorithmBlockSize(algorithm);
         int counter = 1;
         byte[] input = new byte[blockSize];
 
@@ -28,7 +31,7 @@ public class CTR {
             System.arraycopy(counterBytes, 0, input, 0, counterBytes.length);
             System.arraycopy(nonceBytes, 0, input, counterBytes.length, nonceBytes.length);
             System.arraycopy(plainTextBytes, i, temp, 0, blockSize);     // temp'e blok'u atıyoz.
-            System.arraycopy(Main.xorla(temp,ecb.encrypt(input, secretKey,algorithm),algorithm), 0, cipherTextBytes, i, blockSize);
+            System.arraycopy(FileCipher.xorla(temp,ecb.encrypt(input, secretKey,algorithm),algorithm), 0, cipherTextBytes, i, blockSize);
             counter++;
 
         }
@@ -39,7 +42,7 @@ public class CTR {
 
     public byte[] decrypt(byte[] cipherTextBytes, SecretKey secretKey, ECB ecb, String nonce, String algorithm) throws NoSuchAlgorithmException, BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException, InvalidKeyException {
 
-        int blockSize = Main.algorithmBlockSize(algorithm);
+//        int blockSize = FileCipher.algorithmBlockSize(algorithm);
         int counter = 1;
         byte[] input = new byte[blockSize];
 
@@ -55,7 +58,7 @@ public class CTR {
             System.arraycopy(counterBytes, 0, input, 0, counterBytes.length);
             System.arraycopy(nonceBytes, 0, input, counterBytes.length, nonceBytes.length);
             System.arraycopy(cipherTextBytes, i, temp, 0, blockSize);     // temp'e blok'u atıyoz.
-            System.arraycopy(Main.xorla(temp,ecb.encrypt(input, secretKey,algorithm),algorithm), 0, plainTextBytes, i, blockSize);
+            System.arraycopy(FileCipher.xorla(temp,ecb.encrypt(input, secretKey,algorithm),algorithm), 0, plainTextBytes, i, blockSize);
             counter++;
 
         }
