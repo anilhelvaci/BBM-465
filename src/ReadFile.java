@@ -16,10 +16,9 @@ public class ReadFile {
     private String nonce;
 
 
-    public ReadFile(String keyFilePath, String inputFilePath, String algorithm) {
+    public ReadFile(String keyFilePath, String inputFilePath, String algorithm, int blockSize) {
         readKeyFile(keyFilePath, algorithm);
         readInputFile(inputFilePath);
-        int blockSize = FileCipher.algorithmBlockSize(algorithm);
         paddedText = padding(text, blockSize);
     }
 
@@ -51,7 +50,6 @@ public class ReadFile {
         String[] data = readFileAsString(filePath).split(" - ");
         initVec = data[0].getBytes(StandardCharsets.UTF_8);
         byte[] decodedKey = data[1].getBytes(StandardCharsets.UTF_8);
-        System.out.println(decodedKey.length);
         key = new SecretKeySpec(decodedKey, algorithm);
         nonce = data[2];
     }

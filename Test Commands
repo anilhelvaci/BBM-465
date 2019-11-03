@@ -1,0 +1,39 @@
+---------- AES ----------
+
+-Encode Test (AES/CBC)
+java FileCipher -e -i input_file_test -o coded.txt AES CBC key_file
+
+-Decode Test (AES/CBC)
+java FileCipher -d -i coded.txt -o plain.txt AES CBC key_file
+
+-Encode Test (AES/OFB)
+java FileCipher -e -i input_file_test -o coded.txt AES OFB key_file
+
+-Decode Test (AES/OFB)
+java FileCipher -d -i coded.txt -o plain.txt AES OFB key_file
+
+-Encode Test (AES/CTR)
+java FileCipher -e -i input_file_test -o coded.txt AES CTR key_file
+
+-Decode Test (AES/CTR)
+java FileCipher -d -i coded.txt -o plain.txt AES CTR key_file
+
+---------- DES ----------
+
+-Encode Test (DES/CBC)
+java FileCipher -e -i input_file_test -o coded.txt DES CBC key_file
+
+-Decode Test (DES/CBC)
+java FileCipher -d -i coded.txt -o plain.txt DES CBC key_file
+
+-Encode Test (DES/OFB)
+java FileCipher -e -i input_file_test -o coded.txt DES OFB key_file
+
+-Decode Test (DES/OFB)
+java FileCipher -d -i coded.txt -o plain.txt DES OFB key_file
+
+-Encode Test (DES/CTR)
+java FileCipher -e -i input_file_test -o coded.txt DES CTR key_file
+
+-Decode Test (DES/CTR)
+java FileCipher -d -i coded.txt -o plain.txt DES CTR key_file
