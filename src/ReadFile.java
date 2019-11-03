@@ -13,13 +13,18 @@ public class ReadFile {
     private byte[] paddedText;
     private byte[] initVec;
     private SecretKey key;
-    private String nonce;
+    private byte[] nonce;
+    private int blockSize;
+    private byte[] decodedKey;
 
 
     public ReadFile(String keyFilePath, String inputFilePath, String algorithm, int blockSize) {
-        readKeyFile(keyFilePath, algorithm);
         readInputFile(inputFilePath);
+        this.blockSize = blockSize;
         paddedText = padding(text, blockSize);
+        initVec = new byte[blockSize];
+        decodedKey = new byte[blockSize];
+        readKeyFile(keyFilePath, algorithm);
     }
 
     public String readFileAsString(String fileName) {
@@ -48,10 +53,26 @@ public class ReadFile {
 
     private void readKeyFile(String filePath, String algorithm) {
         String[] data = readFileAsString(filePath).split(" - ");
-        initVec = data[0].getBytes(StandardCharsets.UTF_8);
-        byte[] decodedKey = data[1].getBytes(StandardCharsets.UTF_8);
-        key = new SecretKeySpec(decodedKey, algorithm);
-        nonce = data[2];
+        switch (algorithm) {
+            case "AES":
+                initVec = data[0].getBytes(StandardCharsets.UTF_8);
+                decodedKey = data[1].getBytes(StandardCharsets.UTF_8);
+                key = new SecretKeySpec(decodedKey, algorithm);
+                nonce = data[2].getBytes(StandardCharsets.UTF_8);
+                break;
+
+            case "DES":
+                byte[] tempInitVec = data[0].getBytes(StandardCharsets.UTF_8);
+                byte[] tempDecodedKey = data[1].getBytes(StandardCharsets.UTF_8);
+                byte[] tempNonce = data[2].getBytes(StandardCharsets.UTF_8);
+                nonce = new byte[blockSize / 2];
+                System.arraycopy(tempInitVec, tempInitVec.length - 1 - blockSize, initVec, 0, blockSize);
+                System.arraycopy(tempDecodedKey, tempDecodedKey.length - 1 - blockSize, decodedKey, 0, blockSize);
+                System.arraycopy(tempNonce, tempNonce.length - 1 - blockSize / 2, nonce, 0, blockSize / 2);
+                key = new SecretKeySpec(decodedKey, algorithm);
+                break;
+        }
+
     }
 
     public void readInputFile(String filePath) {
@@ -121,7 +142,7 @@ public class ReadFile {
         return key;
     }
 
-    public String getNonce() {
+    public byte[] getNonce() {
         return nonce;
     }
 }
