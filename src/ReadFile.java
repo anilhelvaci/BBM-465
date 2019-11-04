@@ -90,8 +90,6 @@ public class ReadFile {
 
 
         byte[] plainTextBytesWithPadding = new byte[boyWithPadding];
-        System.out.println("PlainTextBytes Size: " + plainTextBytes.length);
-        System.out.println("BoyWithPadding: " + boyWithPadding);
         System.arraycopy(plainTextBytes,0,plainTextBytesWithPadding,0,plainTextBytes.length);
 
 

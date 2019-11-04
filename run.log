@@ -1,0 +1,12 @@
+input_file_test coded.txt enc AES CBC 195
+coded.txt plain.txt dec AES CBC 143
+input_file_test coded.txt enc AES OFB 195
+coded.txt plain.txt dec AES OFB 174
+input_file_test coded.txt enc AES CTR 160
+coded.txt plain.txt dec AES CTR 182
+input_file_test coded.txt enc DES CBC 152
+coded.txt plain.txt dec DES CBC 146
+input_file_test coded.txt enc DES OFB 194
+coded.txt plain.txt dec DES OFB 178
+input_file_test coded.txt enc DES CTR 177
+coded.txt plain.txt dec DES CTR 145
